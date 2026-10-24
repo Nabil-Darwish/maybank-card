@@ -23,12 +23,13 @@ public class User {
     @Column(name = "AnnualIncome") private BigDecimal annualIncome;
     @Column(name = "Citizen") private boolean citizen;
     @Column(name = "ContactNumber") private String contactNumber;
+    @Column(name = "ICNumber") private String icNumber;
 
     protected User() {}
 
     public User(String firstName, String lastName, LocalDate dateOfBirth, String address1,
                 String address2, String postcode, BigDecimal annualIncome,
-                boolean citizen, String contactNumber) {
+                boolean citizen, String contactNumber, String icNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
@@ -38,6 +39,7 @@ public class User {
         this.annualIncome = annualIncome;
         this.citizen = citizen;
         this.contactNumber = contactNumber;
+        this.icNumber = icNumber;
     }
 
     public Integer getAge() { // computed, not stored
@@ -55,4 +57,5 @@ public class User {
     public BigDecimal getAnnualIncome() { return annualIncome; }
     public boolean isCitizen() { return citizen; }
     public String getContactNumber() { return contactNumber; }
+    public String getIcNumber() { return icNumber; }
 }
