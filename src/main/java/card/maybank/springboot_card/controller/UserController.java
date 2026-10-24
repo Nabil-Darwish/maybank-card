@@ -4,9 +4,11 @@ import card.maybank.springboot_card.entity.Card;
 import card.maybank.springboot_card.entity.User;
 import card.maybank.springboot_card.repository.CardRepository;
 import card.maybank.springboot_card.repository.UserRepository;
+import card.maybank.springboot_card.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 @RestController
@@ -15,10 +17,12 @@ public class UserController {
 
     private final UserRepository users;
     private final CardRepository cards;
+    private final UserService userService;
 
-    public UserController(UserRepository users, CardRepository cards) {
+    public UserController(UserRepository users, CardRepository cards, UserService userService) {
         this.users = users;
         this.cards = cards;
+        this.userService = userService;
     }
 
     @GetMapping("/{id}")
@@ -34,4 +38,15 @@ public class UserController {
         }
         return cards.findByUserId(id);
     }
+
+    @PostMapping("/add")
+    public ResponseEntity<?> saveUser(@RequestBody User user) {
+        try {
+            User userSaved = userService.addUser(user);
+            return ResponseEntity.ok(userSaved);
+        } catch (Exception e){
+            return ResponseEntity.badRequest().body("Transaction failed: " + e.getMessage());
+        }
+    }
+
 }
