@@ -58,4 +58,9 @@ public class User {
     public boolean isCitizen() { return citizen; }
     public String getContactNumber() { return contactNumber; }
     public String getIcNumber() { return icNumber; }
+
+    // setters for every field
+    public void setAnnualIncome(BigDecimal annualIncome) {
+        this.annualIncome = annualIncome;
+    }
 }

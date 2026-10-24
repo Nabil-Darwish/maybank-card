@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import java.util.List;
+import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/users")
@@ -57,4 +58,8 @@ public class UserController {
         }
     }
 
+    @PatchMapping("/{id}/income")
+    public User updateUserIncome(@PathVariable Long id, @RequestParam BigDecimal income) {
+        return userService.updateUserAnnualIncome(id, income);
+    }
 }
